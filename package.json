@@ -1,0 +1,24 @@
+{
+  "name": "tugas4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2019-pemrogramanberbasiskerangkakerja-h/secure-gate-system-kelompok_ateng.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/2019-pemrogramanberbasiskerangkakerja-h/secure-gate-system-kelompok_ateng/issues"
+  },
+  "homepage": "https://github.com/2019-pemrogramanberbasiskerangkakerja-h/secure-gate-system-kelompok_ateng#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.2",
+    "express-session": "^1.16.1"
+  }
+}
