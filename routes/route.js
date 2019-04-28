@@ -3,15 +3,15 @@ var router = express.Router();
 var middlewares = require('../middlewares/auth.js')
 var login = require('../controller/login.js')
 
-router.get('/', login.index)
+router.get('/',function(req,res){
+    console.log("get /")
+    res.redirect('login/1')
+})
+router.get('/login/:gate', login.index)
 router.post('/login', login.create)
 router.get('/pages', middlewares.checkSignIn, function(req,res){
-    res.render('pages'),{nrp: req.session.user.nrp}
-});
-router.use('/pages', function(err, req, res, next){
-    console.log(err);
-    //User should be authenticated! Redirect him to log in.
-    res.redirect('/');
+    console.log(req.session)
+    res.render('pages',{nrp: req.session.user, gate : req.session.gate})
 });
 
 module.exports = router

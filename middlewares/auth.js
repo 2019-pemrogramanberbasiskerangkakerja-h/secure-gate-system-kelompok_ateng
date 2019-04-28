@@ -4,6 +4,6 @@ exports.checkSignIn = (req,res, next)=>{
      } else {
         var err = new Error("Not logged in!");
         console.log(req.session.user);
-        next(err);  //Error, trying to access unauthorized page!
+        res.render('index',{message : "you must login first!"});
      }
 }
