@@ -4,26 +4,28 @@ CREATE TABLE IF NOT EXISTS Gate (
     PRIMARY KEY (gate_id)
 )  ENGINE=INNODB;
 
-CREATE TABLE IF NOT EXISTS Time (
-    time_id INT AUTO_INCREMENT,
-    open Datetime,
-    close Datetime,
-    PRIMARY KEY (time_id)
-)  ENGINE=INNODB;
-
-CREATE TABLE IF NOT EXISTS User (
-    nrp VARCHAR(15),
-    name VARCHAR(100),
-    PRIMARY KEY (nrp)
-)  ENGINE=INNODB;
-
 CREATE TABLE IF NOT EXISTS Jadwal(
     jadwal_id INT AUTO_INCREMENT,
+    open_time TIME,
+    close_time TIME,
     fk_gate_id INT,
-    fk_time_id INT,
-    fk_nrp VARCHAR(100),
     FOREIGN KEY (fk_gate_id) REFERENCES Gate(gate_id),
-    FOREIGN KEY (fk_time_id) REFERENCES Time(time_id),
-    FOREIGN KEY (fk_nrp) REFERENCES User(nrp),
     PRIMARY KEY (jadwal_id)
 )   ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS Grup (
+    grup_id INT NOT NULL AUTO_INCREMENT,
+    nama VARCHAR (255),
+    fk_jadwal_id INT NOT NULL,
+    FOREIGN KEY (fk_jadwal_id) REFERENCES Jadwal(jadwal_id),
+    PRIMARY KEY (grup_id)
+)	ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS User (
+    user_id INT NOT NULL AUTO_INCREMENT,
+    nrp VARCHAR(20) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL,
+    fk_grup_id INT NOT NULL,
+    FOREIGN KEY (fk_grup_id) REFERENCES Grup(grup_id),
+    PRIMARY KEY (user_id)
+)  ENGINE=INNODB;

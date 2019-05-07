@@ -3,20 +3,6 @@ var bodyParser = require('body-parser')
 var path = require('path')
 var hbs = require('express-handlebars')
 var session = require('express-session')
-const mysql = require('mysql');
-
-const conn = mysql.createConnection({
-    host: 'localhost',
-    user: 'rosyadi',
-    password: 'rosyadi',
-    database: 'secure_gate'
-  });
-
-conn.connect((err) =>{
-    if(err) throw err;
-    console.log('Mysql Connected...');
-});
-   
 
 app = express()
 app.use(session({secret: "Kelompok Ateng"}))
