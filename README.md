@@ -13,13 +13,13 @@
     > curl -X DELETE http://localhost:3000/users/[id_user]
 
 ### Gate
-- POST /gates  - add gate
+- POST /gate  - add gate
     > curl -d "name=[nama_gate]" -X POST http://localhost:3000/gate
-- GET /gates  - get all gates
+- GET /gate  - get all gates
     > curl http://localhost:3000/gate
-- GET /gates/:gateid - get info gate
+- GET /gate/:gateid - get info gate
     > curl http://localhost:3000/gate/[id_gate]
-- DELETE /gates/:gateid - delete gate
+- DELETE /gate/:gateid - delete gate
     > curl -X DELETE http://localhost:3000/gate/[id_gate]
 
 ### Jadwal
