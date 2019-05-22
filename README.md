@@ -22,6 +22,16 @@
 - DELETE /gate/:gateid - delete gate
     > curl -X DELETE http://localhost:3000/gate/[id_gate]
 
+### Group
+- POST /group -add group
+    > curl -d "name=[nama_group]&jadwal=[id_jadwal]" -X POST http://localhost:3000/group
+- GET /group - get all group
+    > curl http://localhost:3000/group
+- GET /group/:id_group - get info group
+    > curl httl://localhost:3000/group/[id_group]
+- DELETE /group/:id_group -delete group
+    > curl -X DELETE http://localhost:3000/group/[id_group]
+    
 ### Jadwal
 
 - POST /jadwal  - add jadwal

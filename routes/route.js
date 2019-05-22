@@ -23,6 +23,16 @@ router.route('/gate/:gate_id')
   .get(controller.findGate)
   .delete(controller.deleteGate);
 
+//group
+
+router.route('/group')
+  .get(controller.getAllGroup)
+  .post(controller.postGroup);
+
+router.route('/group/:group_id')
+  .get(controller.findGroup)
+  .delete(controller.deleteGroup);
+
 //Jadwal
 
 router.route('/jadwal')

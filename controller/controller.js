@@ -117,6 +117,61 @@ exports.deleteGate = (req, res)=> {
     });
 };
 
+//gate
+
+exports.getAllGroup = (req,res)=>{
+    db.query('SELECT * FROM grup', function (error, rows, fields){
+        if(error){
+            console.log(error)
+        } else{
+            response.ok(rows, res)
+        }
+    });
+}
+
+exports.postGroup = (req,res)=>{
+    var name = req.body.name;
+    var jadwal = req.body.jadwal;
+    console.log(req.body)
+    if(!name){
+        res.status("400");
+        res.send("Invalid name!");
+    } else {
+        db.query('INSERT INTO grup (name,fk_jadwal_id) VALUES (?,?)', [name,jadwal], function(error, result, fields) {
+            if(error) {
+                console.log(error)
+                response.error('Duplicate!', res)
+            } else {
+                response.ok('Add group Success!', res)
+            }
+        });
+    }
+}
+
+exports.findGroup = (req,res)=>{
+    var group_id = req.params.group_id;
+    db.query('SELECT * FROM grup WHERE grup_id = ?', [ group_id ], 
+    function (error, rows, fields){
+        if(error){
+            console.log(error)
+        } else{
+            response.ok(rows, res)
+        }
+    });
+}
+
+exports.deleteGroup = (req, res)=> {
+    var group_id = req.params.group_id;
+    db.query('DELETE FROM grup WHERE grup_id = ?', [ group_id ], 
+    function (error, rows, fields){
+        if(error){
+            console.log(error)
+        } else{
+            response.ok("Delete group Success!", res)
+        }
+    });
+};
+
 //Jadwal
 exports.getAllJadwal = (req,res)=>{
     db.query('SELECT * FROM jadwal', function (error, rows, fields){
