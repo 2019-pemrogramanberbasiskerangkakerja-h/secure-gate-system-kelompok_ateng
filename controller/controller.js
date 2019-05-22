@@ -5,11 +5,11 @@ const saltRounds = 8;
 
 //USER
 function insert_log(nrp, value) {
-    db.query('INSERT into log (nrp,status) value (?,?)',[nrp,value]);
+    db.query('INSERT into Log (nrp,status) value (?,?)',[nrp,value]);
 }
 
 exports.getAllUser = (req,res)=>{
-    db.query('SELECT * FROM user', function (error, rows, fields){
+    db.query('SELECT * FROM User', function (error, rows, fields){
         if(error){
             console.log(error)
         } else{
@@ -28,7 +28,7 @@ exports.postUser = (req,res)=>{
         res.send("Invalid details!");
     } else {
         var hash = bcrypt.hashSync(password, saltRounds);
-        db.query('INSERT INTO user (nrp, password, fk_grup_id) VALUES (?,?,?)', [nrp, hash, grup], function(error, result, fields) {
+        db.query('INSERT INTO User (nrp, password, fk_grup_id) VALUES (?,?,?)', [nrp, hash, grup], function(error, result, fields) {
             if(error) {
                 console.log(error)
                 response.error('Duplicate!', res)
@@ -41,7 +41,7 @@ exports.postUser = (req,res)=>{
 
 exports.findUser = (req,res)=>{
     var user_id = req.params.user_id;
-    db.query('SELECT * FROM user WHERE user_id = ?', [ user_id ], 
+    db.query('SELECT * FROM User WHERE user_id = ?', [ user_id ], 
     function (error, rows, fields){
         if(error){
             console.log(error)
@@ -53,7 +53,7 @@ exports.findUser = (req,res)=>{
 
 exports.deleteUser = (req, res)=> {
     var user_id = req.params.user_id;
-    db.query('DELETE FROM user WHERE user_id = ?', [ user_id ], 
+    db.query('DELETE FROM User WHERE user_id = ?', [ user_id ], 
     function (error, rows, fields){
         if(error){
             console.log(error)
@@ -66,7 +66,7 @@ exports.deleteUser = (req, res)=> {
 //gate
 
 exports.getAllGate = (req,res)=>{
-    db.query('SELECT * FROM gate', function (error, rows, fields){
+    db.query('SELECT * FROM Gate', function (error, rows, fields){
         if(error){
             console.log(error)
         } else{
@@ -95,7 +95,7 @@ exports.postGate = (req,res)=>{
 
 exports.findGate = (req,res)=>{
     var gate_id = req.params.gate_id;
-    db.query('SELECT * FROM gate WHERE gate_id = ?', [ gate_id ], 
+    db.query('SELECT * FROM Gate WHERE gate_id = ?', [ gate_id ], 
     function (error, rows, fields){
         if(error){
             console.log(error)
@@ -107,7 +107,7 @@ exports.findGate = (req,res)=>{
 
 exports.deleteGate = (req, res)=> {
     var gate_id = req.params.gate_id;
-    db.query('DELETE FROM gate WHERE gate_id = ?', [ gate_id ], 
+    db.query('DELETE FROM Gate WHERE gate_id = ?', [ gate_id ], 
     function (error, rows, fields){
         if(error){
             console.log(error)
@@ -120,7 +120,7 @@ exports.deleteGate = (req, res)=> {
 //gate
 
 exports.getAllGroup = (req,res)=>{
-    db.query('SELECT * FROM grup', function (error, rows, fields){
+    db.query('SELECT * FROM Grup', function (error, rows, fields){
         if(error){
             console.log(error)
         } else{
@@ -137,7 +137,7 @@ exports.postGroup = (req,res)=>{
         res.status("400");
         res.send("Invalid name!");
     } else {
-        db.query('INSERT INTO grup (name,fk_jadwal_id) VALUES (?,?)', [name,jadwal], function(error, result, fields) {
+        db.query('INSERT INTO Grup (name,fk_jadwal_id) VALUES (?,?)', [name,jadwal], function(error, result, fields) {
             if(error) {
                 console.log(error)
                 response.error('Duplicate!', res)
@@ -150,7 +150,7 @@ exports.postGroup = (req,res)=>{
 
 exports.findGroup = (req,res)=>{
     var group_id = req.params.group_id;
-    db.query('SELECT * FROM grup WHERE grup_id = ?', [ group_id ], 
+    db.query('SELECT * FROM Grup WHERE grup_id = ?', [ group_id ], 
     function (error, rows, fields){
         if(error){
             console.log(error)
@@ -162,7 +162,7 @@ exports.findGroup = (req,res)=>{
 
 exports.deleteGroup = (req, res)=> {
     var group_id = req.params.group_id;
-    db.query('DELETE FROM grup WHERE grup_id = ?', [ group_id ], 
+    db.query('DELETE FROM Grup WHERE grup_id = ?', [ group_id ], 
     function (error, rows, fields){
         if(error){
             console.log(error)
@@ -174,7 +174,7 @@ exports.deleteGroup = (req, res)=> {
 
 //Jadwal
 exports.getAllJadwal = (req,res)=>{
-    db.query('SELECT * FROM jadwal', function (error, rows, fields){
+    db.query('SELECT * FROM Jadwal', function (error, rows, fields){
         if(error){
             console.log(error)
         } else{
@@ -192,7 +192,7 @@ exports.postJadwal = (req,res)=>{
         res.status("400");
         res.send("Invalid input!");
     } else {
-        db.query('INSERT INTO jadwal (open_time,close_time,fk_gate_id) VALUES (?,?,?)', [open,close,gate], function(error, result, fields) {
+        db.query('INSERT INTO Jadwal (open_time,close_time,fk_gate_id) VALUES (?,?,?)', [open,close,gate], function(error, result, fields) {
             if(error) {
                 console.log(error)
                 response.error('Duplicate!', res)
@@ -205,7 +205,7 @@ exports.postJadwal = (req,res)=>{
 
 exports.findJadwal = (req,res)=>{
     var jadwal_id = req.params.jadwal_id;
-    db.query('SELECT * FROM jadwal WHERE jadwal_id = ?', [ jadwal_id ], 
+    db.query('SELECT * FROM Jadwal WHERE jadwal_id = ?', [ jadwal_id ], 
     function (error, rows, fields){
         if(error){
             console.log(error)
@@ -217,7 +217,7 @@ exports.findJadwal = (req,res)=>{
 
 exports.deleteJadwal = (req, res)=> {
     var jadwal_id = req.params.jadwal_id;
-    db.query('DELETE FROM jadwal WHERE jadwal_id = ?', [ jadwal_id ], 
+    db.query('DELETE FROM Jadwal WHERE jadwal_id = ?', [ jadwal_id ], 
     function (error, rows, fields){
         if(error){
             console.log(error)
@@ -235,7 +235,7 @@ exports.login = (req,res)=> {
         res.status("400");
         res.send("Invalid credential!");
     }else{
-        db.query('SELECT a.password, c.open_time,c.close_time FROM user a JOIN grup b ON a.fk_grup_id = b.grup_id JOIN jadwal c ON b.fk_jadwal_id = c.jadwal_id where nrp = ? and c.fk_gate_id = ?', 
+        db.query('SELECT a.password, c.open_time,c.close_time FROM User a JOIN Grup b ON a.fk_grup_id = b.grup_id JOIN Jadwal c ON b.fk_jadwal_id = c.jadwal_id where nrp = ? and c.fk_gate_id = ?', 
         [nrp, gate], function(error, result, fields) {
             if(error){
                 console.log(error)
